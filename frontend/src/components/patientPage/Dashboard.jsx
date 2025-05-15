@@ -27,7 +27,7 @@ function Dashboard() {
     error: weightError,
   } = useSelector((state) => state.weight || {});
   const {
-    status: shipmentStatus = "N/A",
+    status: shipmentStatus = [],
     loading: shipmentStatusLoading,
     error: shipmentStatusError,
   } = useSelector((state) => state.shipmentStatus || {});
@@ -35,7 +35,7 @@ function Dashboard() {
     name: patientName = "N/A",
     loading: patientLoading,
     error: patientError,
-  } = useSelector((state) => state.patient || {}); // Ensure state is an object
+  } = useSelector((state) => state.patient || {});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +51,7 @@ function Dashboard() {
       try {
         dispatch(fetchShipmentStatusStart());
         const shipmentResponse = await fetchShipmentStatus(token);
-        dispatch(fetchShipmentStatusSuccess(shipmentResponse.status));
+        dispatch(fetchShipmentStatusSuccess(shipmentResponse));
       } catch (err) {
         dispatch(fetchShipmentStatusFailure(err.message));
       }
@@ -74,13 +74,18 @@ function Dashboard() {
     shipmentStatus,
     patientName,
   };
+  const shipmentStatusSummary = Array.isArray(shipmentStatus)
+    ? shipmentStatus.length > 0
+      ? `${shipmentStatus.length} shipments`
+      : "No shipments"
+    : shipmentStatus || "N/A";
 
   return (
     <div className="space-y-6">
       <WelcomeCard summary={summary} />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatsCard label="Current Weight" value={`${summary.weight} kg`} />
-        <StatsCard label="Shipment Status" value={summary.shipmentStatus} />
+        <StatsCard label="Shipment Status" value={shipmentStatusSummary} />
         <StatsCard label="Patient" value={summary.patientName} />
       </div>
       <WeightChart

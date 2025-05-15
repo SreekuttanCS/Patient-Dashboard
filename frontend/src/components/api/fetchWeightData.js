@@ -14,7 +14,7 @@ const fetchWeightData = async (token) => {
     return response.data;
   } catch (err) {
     console.error(err);
-    throw new Error("Failed to fetch weight data"); // Or handle more gracefully
+    throw new Error("Failed to fetch weight data"); 
   }
 };
 

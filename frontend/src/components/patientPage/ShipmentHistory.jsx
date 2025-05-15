@@ -9,9 +9,12 @@ import fetchShipmentStatus from "../api/fetchShipmentStatus";
 
 const ShipmentHistory = () => {
   const dispatch = useDispatch();
-  const { shipments, loading, error } = useSelector(
-    (state) => state.shipmentStatus
-  );
+  const {
+    shipments = [],
+    loading,
+    error,
+  } = useSelector((state) => state.shipmentStatus || {});
+
   const [searchTerm, setSearchTerm] = useState("");
   const token = localStorage.getItem("token");
 

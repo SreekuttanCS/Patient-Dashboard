@@ -8,14 +8,11 @@ const fetchShipmentStatus = async (token) => {
       },
     });
 
-    if (response.data.shipments && response.data.shipments.length > 0) {
-      return response.data.shipments; 
-    }
+    const shipments = response?.data?.shipments;
 
-    return []; 
+    return Array.isArray(shipments) ? shipments : [];
   } catch (err) {
-    console.error("Error fetching shipments:", err);
-    throw new Error("Failed to load shipments");
+    console.error("❌ Error fetching shipments:", err.message || err);
   }
 };
 
