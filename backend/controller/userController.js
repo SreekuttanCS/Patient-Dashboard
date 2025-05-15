@@ -34,7 +34,7 @@ const loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: "Invalid Credentials" });
     const token = generateToken(user._id);
-    res.status(200).json({ token });
+    res.status(200).json({ token, userId: user._id });
   } catch (err) {
     console.error(err);
     res.status(400).json({ message: "Failed to login user" });
@@ -50,4 +50,22 @@ const getAllUser = async (req, res) => {
     res.status(400).json({ message: "Failed to get all user" });
   }
 };
-module.exports = { registerUser, generateToken, loginUser, getAllUser };
+
+const getUserById = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await User.findById(id).select("-password");
+    res.status(200).json({ user });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ message: "Failed to get user by id" });
+  }
+};
+
+module.exports = {
+  registerUser,
+  generateToken,
+  loginUser,
+  getAllUser,
+  getUserById,
+};

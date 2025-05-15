@@ -8,7 +8,7 @@ const protect = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.get("/", protect, getWeight);
+router.get("/:userId", protect, getWeight);
 router.post("/add", protect, addWeight);
 router.delete("/:id", protect, deleteWeight);
 

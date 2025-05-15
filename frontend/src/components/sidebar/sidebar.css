@@ -1,0 +1,30 @@
+.sidebar-li {
+  background: #8acbce;
+  width: 200px;
+  height: 60px;
+  color: white;
+  font-weight: bold;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-li:hover {
+  background: #76b9bc;
+}
+
+.active-li {
+  background-color: #2b696c;
+}
+
+.sidebar {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}

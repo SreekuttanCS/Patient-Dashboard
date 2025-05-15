@@ -1,0 +1,11 @@
+
+.quotes-signup {
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+.right-signup {
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
